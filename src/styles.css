@@ -1,0 +1,278 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Dhenora design system — derived from the jar label:
+ * teal label, deep forest green, gold trim, ghee yellow, warm cream base.
+ * All colours are oklch. Components use only these semantic tokens.
+ */
+
+@theme inline {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Brand tokens */
+  --color-teal: var(--teal);
+  --color-teal-light: var(--teal-light);
+  --color-teal-dark: var(--teal-dark);
+  --color-forest: var(--forest);
+  --color-forest-hover: var(--forest-hover);
+  --color-forest-foreground: var(--forest-foreground);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-ghee: var(--ghee);
+  --color-ghee-hover: var(--ghee-hover);
+  --color-cream: var(--cream);
+  --color-cream-alt: var(--cream-alt);
+  --color-success: var(--success);
+  --color-veg: var(--veg);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.75rem; /* 12px — CTA radius; cards use rounded-2xl (16px+) */
+
+  /* Brand palette */
+  --teal: oklch(0.644 0.109 216.8);
+  --teal-light: oklch(0.939 0.027 214.4);
+  --teal-dark: oklch(0.537 0.091 218.2);
+  --forest: oklch(0.377 0.076 153.4);
+  --forest-hover: oklch(0.313 0.061 153.3);
+  --forest-foreground: oklch(0.979 0.031 92.9);
+  --gold: oklch(0.728 0.138 89.7);
+  --gold-light: oklch(0.87 0.096 94.8);
+  --ghee: oklch(0.842 0.168 90.4);
+  --ghee-hover: oklch(0.783 0.158 89.6);
+  --cream: oklch(0.979 0.031 92.9);
+  --cream-alt: oklch(0.993 0.012 96.4);
+  --success: oklch(0.523 0.135 144.2);
+  --veg: oklch(0.523 0.135 144.2);
+
+  /* shadcn semantic mapping */
+  --background: var(--cream);
+  --foreground: oklch(0.23 0.021 162.5);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.23 0.021 162.5);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.23 0.021 162.5);
+  --primary: var(--forest);
+  --primary-foreground: var(--cream);
+  --secondary: var(--teal-light);
+  --secondary-foreground: var(--forest);
+  --muted: oklch(0.955 0.02 92);
+  --muted-foreground: oklch(0.451 0.024 163.7);
+  --accent: var(--teal-light);
+  --accent-foreground: var(--forest);
+  --destructive: oklch(0.539 0.194 26.7);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.04 92);
+  --input: oklch(0.88 0.035 92);
+  --ring: var(--teal);
+
+  /* Gradients, shadows, motion */
+  --gradient-hero: linear-gradient(115deg, var(--teal-light) 0%, oklch(0.86 0.055 214) 45%, var(--teal) 100%);
+  --gradient-gold-line: linear-gradient(90deg, transparent, var(--gold), transparent);
+  --gradient-sun: radial-gradient(circle at 50% 100%, color-mix(in oklab, var(--ghee) 55%, transparent) 0%, color-mix(in oklab, var(--gold-light) 30%, transparent) 40%, transparent 70%);
+  --shadow-card: 0 1px 2px color-mix(in oklab, var(--forest) 6%, transparent), 0 8px 24px -12px color-mix(in oklab, var(--forest) 18%, transparent);
+  --shadow-lift: 0 2px 4px color-mix(in oklab, var(--forest) 8%, transparent), 0 18px 40px -16px color-mix(in oklab, var(--forest) 30%, transparent);
+  --shadow-jar: 0 40px 60px -30px color-mix(in oklab, var(--forest) 55%, transparent);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --chart-1: var(--teal);
+  --chart-2: var(--forest);
+  --chart-3: var(--gold);
+  --chart-4: var(--ghee);
+  --chart-5: var(--teal-dark);
+  --sidebar: var(--forest);
+  --sidebar-foreground: var(--cream);
+  --sidebar-primary: var(--ghee);
+  --sidebar-primary-foreground: var(--forest);
+  --sidebar-accent: var(--forest-hover);
+  --sidebar-accent-foreground: var(--cream);
+  --sidebar-border: color-mix(in oklab, var(--gold) 40%, transparent);
+  --sidebar-ring: var(--teal);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ---------- Brand utilities ---------- */
+
+@utility container-brand {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility bg-hero {
+  background-image: var(--gradient-hero);
+}
+
+@utility bg-sun {
+  background-image: var(--gradient-sun);
+}
+
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+@utility shadow-jar {
+  filter: drop-shadow(var(--shadow-jar));
+}
+
+/* Thin gold line under headings */
+@utility gold-rule {
+  display: block;
+  height: 2px;
+  width: 4rem;
+  background-image: var(--gradient-gold-line);
+}
+
+/* Gold hairline divider for header/footer */
+@utility gold-hairline {
+  height: 1px;
+  background-image: var(--gradient-gold-line);
+  opacity: 0.7;
+}
+
+/* Brand card: white, 16px radius, gold-tinted border, soft shadow, hover lift */
+@utility card-brand {
+  background-color: var(--color-card);
+  border-radius: 1rem;
+  border: 1px solid color-mix(in oklab, var(--gold) 28%, transparent);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 300ms var(--ease-soft),
+    box-shadow 300ms var(--ease-soft);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Soft fade-up on scroll (toggled via data-visible) */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 700ms var(--ease-soft),
+    transform 700ms var(--ease-soft);
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@utility animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* Marquee — duplicated items in markup keep the loop seamless */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
