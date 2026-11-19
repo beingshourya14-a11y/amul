@@ -7,13 +7,13 @@ const ITEMS = [
   { icon: ShieldCheck, text: "No added preservatives" },
   { icon: Sprout, text: "Rich in natural nutrients" },
   { icon: Leaf, text: "100% Vegetarian" },
-  { icon: Award, text: "10+ years of trust" },
+  { icon: Award, text: "70+ years of trust" },
   { icon: Truck, text: `Free shipping above ${formatINR(FREE_SHIPPING_THRESHOLD)}` },
   { icon: Wallet, text: "Cash on Delivery available" },
   { icon: ShieldCheck, text: "No added preservatives" },
   { icon: Sprout, text: "Rich in natural nutrients" },
   { icon: Leaf, text: "100% Vegetarian" },
-  { icon: Award, text: "10+ years of trust" },
+  { icon: Award, text: "70+ years of trust" },
 ];
 
 export function AnnouncementBar() {

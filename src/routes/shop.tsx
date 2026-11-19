@@ -7,12 +7,12 @@ import { FREE_SHIPPING_THRESHOLD, formatINR, PACKAGING_CLAIMS, PRODUCTS } from "
 export const Route = createFileRoute("/shop")({
   head: () => ({
     meta: [
-      { title: "Shop Dhenora Cow Ghee — 500 ml & 1 L Jars" },
+      { title: "Shop Amul Cow Ghee — 500 ml & 1 L Jars" },
       {
         name: "description",
-        content: "Buy Dhenora pure cow ghee online: 500 ml for ₹1,000 and 1 L for ₹2,000, inclusive of GST. Free shipping above ₹999.",
+        content: "Buy Amul pure cow ghee online: 500 ml for ₹1,000 and 1 L for ₹2,000, inclusive of GST. Free shipping above ₹999.",
       },
-      { property: "og:title", content: "Shop Dhenora Cow Ghee — 500 ml & 1 L Jars" },
+      { property: "og:title", content: "Shop Amul Cow Ghee — 500 ml & 1 L Jars" },
       { property: "og:description", content: "Pure cow ghee in glass jars with gold lids. Cash on Delivery available." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -27,7 +27,7 @@ function Shop() {
       <div className="container-brand">
         <SectionHeading
           eyebrow="Shop"
-          title="Dhenora Cow Ghee"
+          title="Amul Cow Ghee"
           subtitle={`Prices include GST. Free shipping on orders above ${formatINR(FREE_SHIPPING_THRESHOLD)}.`}
         />
         <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
