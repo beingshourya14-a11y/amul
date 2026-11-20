@@ -50,16 +50,16 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
     <Dialog open={open} onOpenChange={(v) => { if (!v) onClose(); }}>
       <DialogContent
         className={cn(
-          "max-h-[92vh] w-full max-w-4xl overflow-hidden p-0 gap-0",
+          "max-h-[92vh] w-full max-w-4xl p-0 gap-0",
           "bg-cream-alt border-0 shadow-[0_32px_80px_-16px_rgba(0,0,0,0.35)]",
-          "rounded-2xl",
+          "rounded-2xl overflow-y-auto",
         )}
       >
         {/* Screenreader-only title */}
         <DialogTitle className="sr-only">{product.name} {product.size}</DialogTitle>
         <DialogDescription className="sr-only">{product.blurb}</DialogDescription>
 
-        <div className="flex h-full max-h-[92vh] flex-col md:flex-row overflow-hidden">
+        <div className="flex flex-col md:flex-row md:h-[88vh] md:max-h-[88vh] md:overflow-hidden">
 
           {/* ══ LEFT: Image panel ══ */}
           <div className="relative flex shrink-0 flex-col items-center justify-center bg-gradient-to-br from-[oklch(0.97_0.025_92)] to-[oklch(0.93_0.04_92)] md:w-[42%]">
@@ -75,16 +75,16 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
             <VegMark className="absolute right-4 top-5 bg-white/80 backdrop-blur-sm" />
 
             {/* Product image */}
-            <div className="flex items-center justify-center p-10 md:p-12">
+            <div className="flex items-center justify-center p-8 md:p-12">
               <img
                 src={product.image}
                 alt={`${product.name} ${product.size}`}
-                className="h-56 w-full object-contain drop-shadow-2xl md:h-72 transition-transform duration-700 hover:scale-105"
+                className="h-48 w-full object-contain drop-shadow-2xl md:h-72 transition-transform duration-700 hover:scale-105"
               />
             </div>
 
             {/* Star rating */}
-            <div className="mb-6 flex items-center gap-1">
+            <div className="mb-5 flex items-center gap-1">
               {[1,2,3,4,5].map((s) => (
                 <Star key={s} className="size-4 fill-gold text-gold" />
               ))}
@@ -92,15 +92,15 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
             </div>
           </div>
 
-          {/* ══ RIGHT: Details panel ══ */}
-          <div className="flex flex-1 flex-col overflow-hidden">
+          {/* ══ RIGHT: Details panel (scrollable on both mobile and desktop) ══ */}
+          <div className="flex flex-1 flex-col md:overflow-hidden">
 
             {/* Header */}
-            <div className="border-b bg-white px-7 py-6">
+            <div className="border-b bg-white px-5 py-5 md:px-7 md:py-6">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-dark">
                 Sri Parvathi Ghee
               </p>
-              <h2 className="mt-1 font-serif text-2xl font-bold leading-tight text-forest md:text-3xl">
+              <h2 className="mt-1 font-serif text-xl font-bold leading-tight text-forest md:text-3xl">
                 {product.name}
               </h2>
               <p className="mt-0.5 text-sm text-muted-foreground">
@@ -108,8 +108,8 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
               </p>
 
               {/* Price row */}
-              <div className="mt-4 flex items-end gap-3">
-                <span className="text-4xl font-extrabold tracking-tight text-forest">
+              <div className="mt-3 flex items-end gap-3">
+                <span className="text-3xl font-extrabold tracking-tight text-forest md:text-4xl">
                   {formatINR(product.price)}
                 </span>
                 <span className="mb-1 rounded-full bg-teal-light px-2.5 py-0.5 text-xs font-semibold text-teal-dark">
@@ -118,7 +118,7 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
               </div>
 
               {/* Trust strip */}
-              <div className="mt-4 flex flex-wrap gap-3">
+              <div className="mt-3 flex flex-wrap gap-3">
                 {TRUST.map(({ icon: Icon, label }) => (
                   <span key={label} className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <Icon className="size-3.5 shrink-0 text-success" />
@@ -129,7 +129,7 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
             </div>
 
             {/* Scrollable body */}
-            <div className="flex-1 overflow-y-auto px-7 py-5">
+            <div className="flex-1 overflow-y-auto px-5 py-5 md:px-7">
 
               {/* Short description */}
               {d && (
@@ -215,23 +215,26 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
                   )}
                 </div>
               )}
+
+              {/* Spacer so sticky bar doesn't cover content on mobile */}
+              <div className="h-4 md:hidden" />
             </div>
 
             {/* ── Sticky Buy Bar ── */}
-            <div className="border-t bg-white px-7 py-5">
-              <div className="flex items-center gap-4">
+            <div className="border-t bg-white px-5 py-4 md:px-7 md:py-5">
+              <div className="flex items-center gap-3">
                 {/* Qty */}
                 <div className="flex items-center rounded-xl border-2 border-forest overflow-hidden">
                   <button
-                    className="flex size-10 items-center justify-center text-forest hover:bg-forest hover:text-forest-foreground transition-colors"
+                    className="flex size-9 items-center justify-center text-forest hover:bg-forest hover:text-forest-foreground transition-colors md:size-10"
                     onClick={() => setQty((q) => Math.max(1, q - 1))}
                     aria-label="Decrease"
                   >
                     <Minus className="size-4" />
                   </button>
-                  <span className="w-10 text-center text-sm font-bold text-forest">{qty}</span>
+                  <span className="w-9 text-center text-sm font-bold text-forest md:w-10">{qty}</span>
                   <button
-                    className="flex size-10 items-center justify-center text-forest hover:bg-forest hover:text-forest-foreground transition-colors"
+                    className="flex size-9 items-center justify-center text-forest hover:bg-forest hover:text-forest-foreground transition-colors md:size-10"
                     onClick={() => setQty((q) => q + 1)}
                     aria-label="Increase"
                   >
@@ -240,17 +243,17 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
                 </div>
 
                 {/* Add to cart */}
-                <Button variant="cta" size="lg" className="flex-1 text-base font-bold" onClick={handleAdd}>
-                  <ShoppingBag className="size-5" />
+                <Button variant="cta" size="lg" className="flex-1 text-sm font-bold md:text-base" onClick={handleAdd}>
+                  <ShoppingBag className="size-4" />
                   Add to Cart · {formatINR(product.price * qty)}
                 </Button>
               </div>
 
               {/* Veg + disclaimer row */}
-              <div className="mt-3 flex items-center gap-3">
+              <div className="mt-2 flex items-center gap-2">
                 <VegMark className="bg-transparent" />
                 <p className="text-xs text-muted-foreground">
-                  100% Vegetarian · <span className="text-success font-medium">No added preservatives</span> · Best before 6 months from manufacture
+                  100% Vegetarian · <span className="text-success font-medium">No added preservatives</span>
                 </p>
               </div>
             </div>

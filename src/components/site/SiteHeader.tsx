@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const NAV = [
   { to: "/", label: "Home", exact: true },
   { to: "/shop", label: "Shop", exact: false },
-  { to: "/about", label: "Our Story", exact: false },
+  { to: "/about", label: "About", exact: false },
 ] as const;
 
 // Coming-soon nav entries that show in mobile drawer too
@@ -122,10 +122,11 @@ export function SiteHeader() {
                 aria-label={`Cart${count > 0 ? `, ${count} items` : ""}`}
                 className="relative"
                 onClick={() => setOpen(true)}
+                data-cart-icon
               >
                 <ShoppingBag className="size-5" />
                 {count > 0 && (
-                  <span className="absolute -right-0.5 -top-0.5 flex min-w-5 items-center justify-center rounded-full bg-ghee px-1 text-[0.68rem] font-bold leading-none text-forest py-0.5">
+                  <span data-cart-badge className="absolute -right-0.5 -top-0.5 flex min-w-5 items-center justify-center rounded-full bg-ghee px-1 text-[0.68rem] font-bold leading-none text-forest py-0.5">
                     {count > 99 ? "99+" : count}
                   </span>
                 )}

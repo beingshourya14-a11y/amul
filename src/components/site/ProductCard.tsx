@@ -2,12 +2,12 @@ import { useState } from "react";
 import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatINR, type Product } from "@/lib/catalog";
-import { useCart } from "@/lib/cart";
+import { useSparkToCart } from "@/lib/use-spark-to-cart";
 import { VegMark } from "./VegMark";
 import { ProductDetailDialog } from "./ProductDetailDialog";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { add } = useCart();
+  const { sparkAdd } = useSparkToCart();
   const [open, setOpen] = useState(false);
 
   return (
@@ -33,28 +33,35 @@ export function ProductCard({ product }: { product: Product }) {
             height={400}
             className="aspect-[4/3] w-full object-contain bg-cream-alt p-4 transition-transform duration-500 group-hover:scale-105"
           />
-          {/* Hover overlay hint */}
           <div className="absolute inset-0 bg-forest/0 group-hover:bg-forest/5 transition-colors duration-300" />
         </div>
-        <div className="flex flex-1 flex-col gap-3 p-5">
+
+        <div className="flex flex-1 flex-col gap-2 p-3 md:p-5">
           <div>
-            <h3 className="text-xl font-bold text-forest">
+            <h3 className="text-sm font-bold text-forest md:text-xl">
               {product.name}{" "}
-              <span className="font-sans text-base font-medium text-muted-foreground">· {product.size}</span>
+              <span className="font-sans text-xs font-medium text-muted-foreground md:text-base">· {product.size}</span>
             </h3>
-            <p className="mt-1 text-sm text-muted-foreground">{product.blurb}</p>
+            <p className="mt-0.5 hidden text-sm text-muted-foreground md:block">{product.blurb}</p>
           </div>
-          <div className="mt-auto flex items-end justify-between gap-3">
+          <div className="mt-auto flex items-end justify-between gap-2">
             <div>
-              <p className="text-2xl font-bold text-foreground">{formatINR(product.price)}</p>
-              <p className="text-xs text-muted-foreground">Inclusive of GST</p>
+              <p className="text-lg font-bold text-foreground md:text-2xl">{formatINR(product.price)}</p>
+              <p className="text-[0.6rem] text-muted-foreground md:text-xs">Incl. GST</p>
             </div>
             <Button
               variant="cta"
-              onClick={(e) => { e.stopPropagation(); add(product.id); }}
+              size="sm"
+              className="text-xs md:text-sm md:size-default"
+              onClick={(e) => {
+                e.stopPropagation();
+                sparkAdd(e.currentTarget, product.id);
+              }}
               aria-label={`Add ${product.size} jar to cart`}
             >
-              <ShoppingBag /> Add to Cart
+              <ShoppingBag className="size-3 md:size-4" />
+              <span className="hidden sm:inline">Add to Cart</span>
+              <span className="sm:hidden">Add</span>
             </Button>
           </div>
         </div>

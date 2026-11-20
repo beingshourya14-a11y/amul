@@ -1,11 +1,12 @@
 ﻿import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, Droplets, ShieldCheck, Sprout, Truck } from "lucide-react";
+import { ArrowRight, Award, Droplets, Leaf, ShieldCheck, Sprout, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { HillDivider } from "@/components/site/HillDivider";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import jarImage from "@/assets/ghee_4_all_jars_group_4k.png";
+import aboutImage from "@/assets/ghee_2_small_jar_4k.png";
 import { PACKAGING_CLAIMS, PRODUCTS } from "@/lib/catalog";
 import { useReveal } from "@/lib/use-reveal";
 
@@ -52,6 +53,7 @@ function Home() {
       <Hero />
       <TrustStrip />
       <BenefitsSection />
+      <AboutSection />
       <Bestsellers />
     </>
   );
@@ -220,6 +222,62 @@ function BenefitsSection() {
   );
 }
 
+/* ── About section ── */
+
+function AboutSection() {
+  const ref = useReveal<HTMLDivElement>();
+  return (
+    <section className="bg-cream py-16 md:py-24">
+      <div ref={ref} className="reveal container-brand grid items-center gap-10 md:grid-cols-2">
+
+        {/* Image side */}
+        <div className="relative order-2 md:order-1">
+          <img
+            src={aboutImage}
+            alt="Sri Parvathi Ghee jar"
+            loading="lazy"
+            width={800}
+            height={900}
+            className="w-full max-h-[480px] rounded-3xl object-contain shadow-lift"
+          />
+          {/* Floating badge */}
+          <div className="absolute -right-3 -top-3 rounded-2xl bg-forest px-4 py-3 text-center shadow-lift md:-right-5 md:-top-5">
+            <p className="font-serif text-2xl font-bold text-gold-light">100%</p>
+            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-forest-foreground/80">Pure</p>
+          </div>
+        </div>
+
+        {/* Content side */}
+        <div className="order-1 md:order-2 flex flex-col items-start gap-5">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-dark">Our Story</span>
+          <h2 className="font-serif text-3xl font-bold leading-tight text-forest md:text-4xl">
+            Pure · Traditional ·{" "}
+            <span className="text-teal-dark">Homemade</span>
+          </h2>
+          <p className="font-script text-2xl text-teal-dark">From our home to yours</p>
+          <p className="text-muted-foreground leading-relaxed">
+            Sri Parvathi Ghee is made the traditional way — pure cow ghee, no added preservatives,
+            crafted with care to bring homemade goodness to your everyday cooking.
+            Every jar carries our promise: nothing artificial, ever.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {PACKAGING_CLAIMS.map((c) => <ClaimBadge key={c} label={c} />)}
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button variant="cta" size="lg" asChild>
+              <Link to="/shop">Shop Now <ArrowRight className="size-4" /></Link>
+            </Button>
+            <Button variant="forestOutline" size="lg" asChild>
+              <Link to="/about">Read Our Story <ArrowRight className="size-4" /></Link>
+            </Button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
 /* ── Bestsellers ── */
 
 function Bestsellers() {
@@ -232,7 +290,7 @@ function Bestsellers() {
           title="Choose Your Jar"
           subtitle="Every size, the same 100% pure Sri Parvathi cow ghee. Prices include GST."
         />
-        <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-4 grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

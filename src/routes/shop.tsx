@@ -30,7 +30,7 @@ function Shop() {
           title="Sri Parvathi Cow Ghee"
           subtitle={`Prices include GST. Free shipping on orders above ${formatINR(FREE_SHIPPING_THRESHOLD)}.`}
         />
-        <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-5xl gap-4 grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
