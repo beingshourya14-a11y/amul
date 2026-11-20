@@ -9,7 +9,6 @@ import { HillDivider } from "@/components/site/HillDivider";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import jarImage from "@/assets/ghee_4_all_jars_group_4k.png";
-import kitchenImage from "@/assets/ghee_2_small_jar_4k.png";
 import { PACKAGING_CLAIMS, PRODUCTS } from "@/lib/catalog";
 import { useReveal } from "@/lib/use-reveal";
 
@@ -102,7 +101,6 @@ function Home() {
       <TrustStrip />
       <BenefitsSection />
       <Bestsellers />
-      <StoryTeaser />
     </>
   );
 }
@@ -337,51 +335,5 @@ function Bestsellers() {
   );
 }
 
-/* ── Story teaser ── */
 
-function StoryTeaser() {
-  const ref = useReveal<HTMLDivElement>();
-  return (
-    <section className="bg-cream py-16 md:py-24">
-      <div ref={ref} className="reveal container-brand grid items-center gap-12 md:grid-cols-2">
-        <div className="relative">
-          <img
-            src={kitchenImage}
-            alt="Sri Parvathi Ghee jar"
-            loading="lazy"
-            width={800}
-            height={900}
-            className="w-full rounded-3xl object-contain shadow-lift"
-          />
-          {/* Floating badge */}
-          <div className="absolute -right-4 -top-4 hidden rounded-2xl bg-forest px-5 py-4 text-center shadow-lift md:block">
-            <p className="font-serif text-2xl font-bold text-gold-light">100%</p>
-            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-forest-foreground/80">Pure Ghee</p>
-          </div>
-        </div>
 
-        <div className="flex flex-col items-start gap-5">
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-dark">Our Story</span>
-          <h2 className="font-serif text-3xl font-bold leading-tight text-forest md:text-4xl">
-            Pure · Traditional · <br/>
-            <span className="text-teal-dark">Homemade</span>
-          </h2>
-          <p className="font-script text-2xl text-teal-dark">From our house to yours</p>
-          <p className="text-muted-foreground leading-relaxed">
-            Sri Parvathi Ghee is made the traditional way — pure cow ghee, no added preservatives,
-            crafted with care to bring homemade goodness to your everyday cooking.
-            Every jar carries our promise: nothing artificial, ever.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {PACKAGING_CLAIMS.map((c) => <ClaimBadge key={c} label={c} />)}
-          </div>
-          <Button variant="forestOutline" size="lg" asChild>
-            <Link to="/about">
-              Read our story <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
