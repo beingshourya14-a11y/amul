@@ -96,13 +96,13 @@ function Hero() {
         <div className="relative flex items-center justify-center">
           {/* gold sun arc echoing the logo */}
           <div className="absolute aspect-square w-[105%] max-w-[34rem] rounded-full bg-sun" aria-hidden="true" />
-          <div className="relative rounded-full border-[3px] border-gold-light p-3 md:p-4">
+          <div className="relative rounded-2xl border-[3px] border-gold-light p-3 md:p-4 bg-cream-alt">
             <img
               src={jarImage}
               alt="Sri Parvathi Cow Ghee 500 ml glass jar with gold lid"
               width={560}
               height={560}
-              className="animate-float-soft aspect-square w-64 rounded-full object-cover shadow-lift sm:w-80 md:w-96"
+              className="animate-float-soft w-64 object-contain shadow-lift sm:w-80 md:w-96"
             />
           </div>
         </div>
