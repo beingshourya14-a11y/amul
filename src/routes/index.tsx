@@ -5,8 +5,8 @@ import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { HillDivider } from "@/components/site/HillDivider";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import jarImage from "@/assets/ghee-jar.jpg";
-import kitchenImage from "@/assets/ghee-kitchen.jpg";
+import jarImage from "@/assets/ghee_2_small_jar_4k.png";
+import kitchenImage from "@/assets/ghee_4_all_jars_group_4k.png";
 import { PACKAGING_CLAIMS, PRODUCTS } from "@/lib/catalog";
 import { useReveal } from "@/lib/use-reveal";
 
@@ -158,8 +158,8 @@ function Bestsellers() {
   return (
     <section className="bg-teal-light/50 py-16 md:py-24">
       <div ref={ref} className="reveal container-brand">
-        <SectionHeading eyebrow="Shop" title="Choose your jar" subtitle="Two sizes, the same pure cow ghee. Prices include GST." />
-        <div className="mx-auto mt-12 grid max-w-4xl gap-6 md:grid-cols-2">
+        <SectionHeading eyebrow="Shop" title="Choose your jar" subtitle="Five sizes, the same pure cow ghee. Prices include GST." />
+        <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

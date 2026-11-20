@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import kitchenImage from "@/assets/ghee-kitchen.jpg";
+import kitchenImage from "@/assets/ghee_4_all_jars_group_4k.png";
 import { PACKAGING_CLAIMS } from "@/lib/catalog";
 
 export const Route = createFileRoute("/about")({

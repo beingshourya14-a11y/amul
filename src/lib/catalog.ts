@@ -3,7 +3,13 @@
  * Prices are in INR and inclusive of GST.
  * (Phase 2 moves products into the database; these values seed it.)
  */
-import jarImage from "@/assets/ghee-jar.jpg";
+import jarImage1 from "@/assets/ghee_1_ayudha_pooja_jar_4k.png";
+import jarImage2 from "@/assets/ghee_2_small_jar_4k.png";
+import jarImage3 from "@/assets/ghee_3_large_jar_4k.png";
+import jarImage4 from "@/assets/ghee_4_all_jars_group_4k.png";
+import jarImage5 from "@/assets/ghee_5_single_jar_closeup_4k.png";
+
+export { jarImage2 as heroJarImage };
 
 export const FREE_SHIPPING_THRESHOLD = 999; // free shipping on orders above ₹999
 
@@ -18,20 +24,44 @@ export type Product = {
 
 export const PRODUCTS: Product[] = [
   {
+    id: "cow-ghee-200ml",
+    name: "Sri Parvathi Cow Ghee",
+    size: "200 ml",
+    price: 450,
+    image: jarImage1,
+    blurb: "Compact jar — perfect for gifting or trying for the first time.",
+  },
+  {
     id: "cow-ghee-500ml",
     name: "Sri Parvathi Cow Ghee",
     size: "500 ml",
     price: 1000,
-    image: jarImage,
-    blurb: "Glass jar with gold lid — the everyday jar for your kitchen.",
+    image: jarImage2,
+    blurb: "Glass jar — the everyday jar for your kitchen.",
   },
   {
     id: "cow-ghee-1l",
     name: "Sri Parvathi Cow Ghee",
     size: "1 L",
     price: 2000,
-    image: jarImage,
+    image: jarImage3,
     blurb: "The family size, for homes that cook with ghee every day.",
+  },
+  {
+    id: "cow-ghee-multipack",
+    name: "Sri Parvathi Cow Ghee",
+    size: "Variety Pack",
+    price: 2500,
+    image: jarImage4,
+    blurb: "Assorted jar sizes — great for the whole family or bulk orders.",
+  },
+  {
+    id: "cow-ghee-500ml-premium",
+    name: "Sri Parvathi Cow Ghee",
+    size: "500 ml Premium",
+    price: 1200,
+    image: jarImage5,
+    blurb: "Premium selection — same pure ghee in a special presentation.",
   },
 ];
 
