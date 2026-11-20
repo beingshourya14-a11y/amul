@@ -1,5 +1,5 @@
 ﻿import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, Droplets, Leaf, ShieldCheck, Sprout, Truck } from "lucide-react";
+import { ArrowRight, Award, Droplets, Quote, ShieldCheck, Sprout, Star, Truck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { HillDivider } from "@/components/site/HillDivider";
@@ -45,6 +45,33 @@ const STATS = [
   { value: "100%",  label: "Vegetarian"          },
 ];
 
+const TESTIMONIALS = [
+  {
+    name: "Priya S.",
+    location: "Chennai",
+    rating: 5,
+    text: "The aroma when you open the jar is incredible — exactly like homemade ghee from my grandmother's kitchen. We've switched completely.",
+  },
+  {
+    name: "Rajan M.",
+    location: "Bangalore",
+    rating: 5,
+    text: "Best ghee I've had in years. No strange aftertaste, pure golden colour, and the kids love it on their rotis.",
+  },
+  {
+    name: "Deepa K.",
+    location: "Hyderabad",
+    rating: 5,
+    text: "Ordered for Diwali sweets and everyone kept asking where I bought the ghee. Fast delivery too!",
+  },
+  {
+    name: "Suresh P.",
+    location: "Coimbatore",
+    rating: 5,
+    text: "Genuine product, no compromise on quality. The 1L jar is great value. Will definitely order again.",
+  },
+];
+
 /* ── Page ── */
 
 function Home() {
@@ -55,6 +82,8 @@ function Home() {
       <BenefitsSection />
       <AboutSection />
       <Bestsellers />
+      <ReviewsSection />
+      <SuggestedProducts />
     </>
   );
 }
@@ -294,6 +323,88 @@ function Bestsellers() {
           {PRODUCTS.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Reviews ── */
+
+function ReviewsSection() {
+  const ref = useReveal<HTMLDivElement>();
+  return (
+    <section className="bg-cream py-16 md:py-24">
+      <div ref={ref} className="reveal container-brand">
+        <SectionHeading
+          eyebrow="Customer Reviews"
+          title="What Our Customers Say"
+          subtitle="Thousands of families trust Sri Parvathi Ghee every day."
+        />
+
+        {/* Rating bar */}
+        <div className="mx-auto mt-8 mb-10 flex max-w-xs flex-col items-center gap-2">
+          <span className="font-serif text-6xl font-bold text-forest">5.0</span>
+          <div className="flex gap-1">
+            {[1,2,3,4,5].map((s) => <Star key={s} className="size-5 fill-gold text-gold" />)}
+          </div>
+          <span className="text-sm text-muted-foreground">Based on 200+ verified purchases</span>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {TESTIMONIALS.map((r) => (
+            <div
+              key={r.name}
+              className="card-brand flex flex-col gap-3 p-5"
+            >
+              <Quote className="size-6 text-gold opacity-60" aria-hidden="true" />
+              <p className="flex-1 text-sm text-muted-foreground leading-relaxed">{r.text}</p>
+              <div className="flex items-center gap-2 border-t pt-3">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-forest text-xs font-bold text-forest-foreground">
+                  {r.name[0]}
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-forest">{r.name}</p>
+                  <p className="text-xs text-muted-foreground">{r.location}</p>
+                </div>
+                <div className="ml-auto flex gap-0.5">
+                  {[1,2,3,4,5].map((s) => (
+                    <Star key={s} className={`size-3 ${s <= r.rating ? "fill-gold text-gold" : "text-muted-foreground/30"}`} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Suggested Products ── */
+
+function SuggestedProducts() {
+  const ref = useReveal<HTMLDivElement>();
+  // Show top 3 products as suggestions (excluding variety pack)
+  const suggested = PRODUCTS.filter((p) => p.id !== "cow-ghee-multipack").slice(0, 3);
+  return (
+    <section className="bg-ivory py-16 md:py-24">
+      <div ref={ref} className="reveal container-brand">
+        <SectionHeading
+          eyebrow="You May Also Like"
+          title="Popular Picks"
+          subtitle="Our customers' most loved jars — same pure ghee, every size."
+        />
+        <div className="mx-auto mt-10 grid max-w-3xl gap-5 grid-cols-1 sm:grid-cols-3">
+          {suggested.map((p) => (
+            <ProductCard key={p.id} product={p} />
+          ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Button variant="forestOutline" size="lg" asChild>
+            <Link to="/shop">View All Products <ArrowRight className="size-4" /></Link>
+          </Button>
         </div>
       </div>
     </section>

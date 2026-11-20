@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 56 56" className={cn("h-11 w-auto", className)} aria-hidden="true">
+    <svg viewBox="0 0 56 56" className={cn("h-8 w-auto sm:h-11", className)} aria-hidden="true">
       {/* Outer gold ring */}
       <circle cx="28" cy="28" r="27" fill="var(--ghee)" stroke="var(--gold)" strokeWidth="1.5" />
       {/* Inner cream fill */}
@@ -69,7 +69,7 @@ export function Logo({ tone = "light", className }: { tone?: "light" | "dark"; c
   return (
     <Link to="/" className={cn("group flex items-center gap-2", className)} aria-label="Sri Parvathi Ghee home">
       <LogoMark />
-      <span className="flex flex-col leading-none">
+      <span className="hidden sm:flex flex-col leading-none">
         <span
           className={cn(
             "font-serif text-xl font-bold tracking-tight leading-tight",

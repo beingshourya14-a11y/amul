@@ -21,18 +21,50 @@ interface Props {
   onClose: () => void;
 }
 
-type Tab = "highlights" | "nutrition" | "usage";
+type Tab = "highlights" | "nutrition" | "usage" | "reviews";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "highlights", label: "Highlights" },
   { id: "nutrition",  label: "Nutrition" },
   { id: "usage",      label: "Use & Store" },
+  { id: "reviews",    label: "Reviews" },
 ];
 
 const TRUST = [
   { icon: Truck,       label: "Free shipping above ₹999" },
   { icon: ShieldCheck, label: "No added preservatives"   },
   { icon: Award,       label: "100% Pure Cow Ghee"       },
+];
+
+const REVIEWS = [
+  {
+    name: "Priya S.",
+    location: "Chennai",
+    rating: 5,
+    text: "The aroma when you open the jar is incredible — exactly like homemade ghee from my grandmother's kitchen. We've switched completely.",
+    date: "Oct 2026",
+  },
+  {
+    name: "Rajan M.",
+    location: "Bangalore",
+    rating: 5,
+    text: "Best ghee I've had in years. No strange aftertaste, pure golden colour, and the kids love it on their rotis. Highly recommended.",
+    date: "Sep 2026",
+  },
+  {
+    name: "Deepa K.",
+    location: "Hyderabad",
+    rating: 5,
+    text: "Ordered for Diwali sweets and everyone kept asking where I bought the ghee. Fast delivery too!",
+    date: "Nov 2026",
+  },
+  {
+    name: "Suresh P.",
+    location: "Coimbatore",
+    rating: 4,
+    text: "Genuine product, no compromise on quality. The 1L jar is great value. Will order again.",
+    date: "Oct 2026",
+  },
 ];
 
 export function ProductDetailDialog({ product, open, onClose }: Props) {
@@ -211,6 +243,54 @@ export function ProductDetailDialog({ product, open, onClose }: Props) {
                         </div>
                         <p className="text-sm text-muted-foreground leading-relaxed">{d.storage}</p>
                       </div>
+                    </div>
+                  )}
+
+                  {/* Tab: Reviews */}
+                  {tab === "reviews" && (
+                    <div className="mt-4 flex flex-col gap-3">
+                      {/* Rating summary */}
+                      <div className="flex items-center gap-4 rounded-xl border bg-card p-4 shadow-sm">
+                        <div className="flex flex-col items-center">
+                          <span className="font-serif text-5xl font-bold text-forest">5.0</span>
+                          <div className="mt-1 flex gap-0.5">
+                            {[1,2,3,4,5].map((s) => <Star key={s} className="size-3.5 fill-gold text-gold" />)}
+                          </div>
+                          <span className="mt-1 text-xs text-muted-foreground">4 reviews</span>
+                        </div>
+                        <div className="flex-1 flex flex-col gap-1.5">
+                          {[5,4,3,2,1].map((n) => (
+                            <div key={n} className="flex items-center gap-2">
+                              <span className="text-xs w-3 text-muted-foreground">{n}</span>
+                              <Star className="size-3 fill-gold text-gold shrink-0" />
+                              <div className="flex-1 h-1.5 rounded-full bg-teal-light overflow-hidden">
+                                <div
+                                  className="h-full rounded-full bg-gold transition-all"
+                                  style={{ width: n === 5 ? "75%" : n === 4 ? "25%" : "0%" }}
+                                />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Review cards */}
+                      {REVIEWS.map((r) => (
+                        <div key={r.name} className="rounded-xl border bg-card p-4 shadow-sm">
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <p className="font-semibold text-forest text-sm">{r.name}</p>
+                              <p className="text-xs text-muted-foreground">{r.location} · {r.date}</p>
+                            </div>
+                            <div className="flex gap-0.5 shrink-0">
+                              {[1,2,3,4,5].map((s) => (
+                                <Star key={s} className={cn("size-3.5", s <= r.rating ? "fill-gold text-gold" : "text-muted-foreground/30")} />
+                              ))}
+                            </div>
+                          </div>
+                          <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{r.text}</p>
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>

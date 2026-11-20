@@ -73,7 +73,8 @@ export function CartDrawer() {
 
   return (
     <Sheet open={isOpen} onOpenChange={handleClose}>
-      <SheetContent className="flex w-full flex-col gap-0 bg-cream-alt p-0 sm:max-w-md">
+      {/* Mobile: bottom sheet at 75vh. Desktop: right panel. */}
+      <SheetContent className="flex w-full flex-col gap-0 bg-cream-alt p-0 inset-x-0 bottom-0 top-auto h-[75vh] rounded-t-3xl sm:inset-y-0 sm:right-0 sm:left-auto sm:top-0 sm:bottom-0 sm:h-full sm:max-w-md sm:rounded-none">
 
         {/* ── STEP: CART ── */}
         {step === "cart" && (
