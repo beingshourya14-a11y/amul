@@ -351,3 +351,38 @@
     box-shadow: var(--shadow-lift);
   }
 }
+
+/* ── Spark-to-cart animation ── */
+
+@keyframes spark-trail {
+  0%   { opacity: 1; transform: scale(1); }
+  60%  { opacity: 0.6; transform: scale(0.5); }
+  100% { opacity: 0; transform: scale(0); }
+}
+
+@keyframes spark-burst {
+  0%   { opacity: 0; transform: scale(0.4); }
+  30%  { opacity: 1; transform: scale(1.4); }
+  60%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.2); }
+}
+
+@keyframes cart-ping {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(1.35) rotate(-8deg); }
+  50%  { transform: scale(0.9) rotate(5deg); }
+  75%  { transform: scale(1.1) rotate(-3deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes cart-glow {
+  0%   { box-shadow: 0 0 0px 0px color-mix(in oklab, var(--gold) 0%, transparent); }
+  40%  { box-shadow: 0 0 18px 8px color-mix(in oklab, var(--gold) 55%, transparent); }
+  100% { box-shadow: 0 0 0px 0px color-mix(in oklab, var(--gold) 0%, transparent); }
+}
+
+@keyframes count-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
