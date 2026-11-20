@@ -9,13 +9,13 @@ import { PACKAGING_CLAIMS } from "@/lib/catalog";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "Our Story — Amul, The Taste of India" },
+      { title: "Our Story — Sri Parvathi Ghee" },
       {
         name: "description",
-        content: "Amul carries a legacy of trust since 70+ years — pure, natural, traditional cow ghee.",
+        content: "Sri Parvathi Ghee — 100% pure, traditional, homemade cow ghee crafted with care.",
       },
-      { property: "og:title", content: "Our Story — Amul, The Taste of India" },
-      { property: "og:description", content: "A legacy of trust since 70+ years. Pure • Natural • Traditional." },
+      { property: "og:title", content: "Our Story — Sri Parvathi Ghee" },
+      { property: "og:description", content: "100% Pure · Traditional · Homemade cow ghee." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -28,8 +28,8 @@ function About() {
     <>
       <section className="bg-hero py-16 md:py-24">
         <div className="container-brand max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-forest">The Taste of India</p>
-          <h1 className="mt-4 text-4xl font-extrabold text-forest md:text-6xl">A Legacy of Trust Since 70+ Years</h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-forest">100% Pure · Traditional · Homemade</p>
+          <h1 className="mt-4 text-4xl font-extrabold text-forest md:text-6xl">The Goodness of Pure Cow Milk</h1>
           <p className="mt-4 font-script text-3xl text-teal-dark md:text-4xl">The Goodness of Pure Cow Milk</p>
         </div>
       </section>
@@ -44,9 +44,8 @@ function About() {
           <div className="flex flex-col items-start gap-5">
             <SectionHeading align="left" title="Pure • Natural • Traditional" />
             <p className="text-muted-foreground">
-              For more than seventy years, Amul has earned the trust of families. Amul brings that
-              same trust to your kitchen in a glass jar with a gold lid — pure cow ghee with no added
-              preservatives.
+              Sri Parvathi Ghee brings you pure, traditional, homemade cow ghee — crafted the old way,
+              with no added preservatives, delivered in a glass jar with a gold lid.
             </p>
             <p className="text-muted-foreground">
               We keep our promise simple and print it on every jar, so you always know exactly what you're
@@ -59,7 +58,7 @@ function About() {
             </div>
             <Button variant="cta" size="xl" asChild>
               <Link to="/shop">
-              Shop Amul Ghee <ArrowRight />
+              Shop Sri Parvathi Ghee <ArrowRight />
               </Link>
             </Button>
           </div>

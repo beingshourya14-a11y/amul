@@ -55,7 +55,7 @@ export function SiteFooter() {
             <Logo />
             <p className="mt-4 font-script text-2xl text-gold-light">The Goodness of Pure Cow Milk</p>
             <p className="mt-2 max-w-sm text-sm opacity-85">
-              A Legacy of Trust Since 70+ Years. Pure, natural, traditional cow ghee — from Amul to yours.
+              100% Pure · Traditional · Homemade cow ghee — crafted with care, delivered to your kitchen.
             </p>
 
             {/* Social links */}
@@ -106,7 +106,7 @@ export function SiteFooter() {
         <div className="gold-hairline" />
 
         <div className="container-brand flex flex-col items-center justify-between gap-2 py-5 text-xs opacity-75 md:flex-row">
-          <p>© {new Date().getFullYear()} Amul™ · The Taste of India</p>
+          <p>© {new Date().getFullYear()} Sri Parvathi Ghee™ · 100% Pure · Traditional</p>
           <p>Pure • Natural • Traditional</p>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { toast } from "sonner";
 import { cartSubtotal, getProduct, type CartLine } from "@/lib/catalog";
 
-const STORAGE_KEY = "amul-cart-v1";
+const STORAGE_KEY = "sri-parvathi-cart-v1";
 
 type CartContextValue = {
   lines: CartLine[];

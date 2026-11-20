@@ -16,9 +16,9 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // Amul primary CTA: ghee yellow with deep green text, soft lift on hover
+        // Sri Parvathi primary CTA: ghee yellow with deep green text, soft lift on hover
         cta: "rounded-xl bg-ghee text-forest font-semibold shadow-card hover:bg-ghee-hover hover:-translate-y-0.5 hover:shadow-lift transition-all duration-300",
-        // Amul secondary CTA: deep green outline
+        // Sri Parvathi secondary CTA: deep green outline
         forestOutline:
           "rounded-xl border-2 border-forest text-forest font-semibold bg-transparent hover:bg-forest hover:text-forest-foreground transition-all duration-300",
         // Icon buttons on the dark green header

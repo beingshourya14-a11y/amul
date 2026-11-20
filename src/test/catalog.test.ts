@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { cartSubtotal, freeShippingStatus, getProduct } from "@/lib/catalog";
 
-describe("Amul pricing", () => {
+describe("Sri Parvathi pricing", () => {
   it("prices the 500 ml jar at ₹1,000", () => {
     expect(getProduct("cow-ghee-500ml")?.price).toBe(1000);
   });

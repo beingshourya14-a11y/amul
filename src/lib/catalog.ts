@@ -1,5 +1,5 @@
 /**
- * Amul product catalog and pricing rules.
+ * Sri Parvathi Ghee product catalog and pricing rules.
  * Prices are in INR and inclusive of GST.
  * (Phase 2 moves products into the database; these values seed it.)
  */
@@ -19,7 +19,7 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     id: "cow-ghee-500ml",
-    name: "Amul Cow Ghee",
+    name: "Sri Parvathi Cow Ghee",
     size: "500 ml",
     price: 1000,
     image: jarImage,
@@ -27,7 +27,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cow-ghee-1l",
-    name: "Amul Cow Ghee",
+    name: "Sri Parvathi Cow Ghee",
     size: "1 L",
     price: 2000,
     image: jarImage,
@@ -35,7 +35,7 @@ export const PRODUCTS: Product[] = [
   },
 ];
 
-/** Only the claims printed on the Amul jar. Do not add others. */
+/** Only the claims printed on the Sri Parvathi Ghee jar. Do not add others. */
 export const PACKAGING_CLAIMS = [
   "Pure Cow Ghee",
   "No Added Preservatives",

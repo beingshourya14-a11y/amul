@@ -23,7 +23,7 @@ export function CartDrawer() {
               <ShoppingBag className="size-7" aria-hidden="true" />
             </span>
             <p className="font-serif text-xl text-forest">Your cart is empty</p>
-            <p className="text-sm text-muted-foreground">Add a jar of Amul Cow Ghee to get started.</p>
+            <p className="text-sm text-muted-foreground">Add a jar of Sri Parvathi Cow Ghee to get started.</p>
             <Button variant="cta" asChild onClick={() => setOpen(false)}>
               <Link to="/shop">Shop Ghee</Link>
             </Button>

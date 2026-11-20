@@ -13,16 +13,16 @@ import { useReveal } from "@/lib/use-reveal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Amul Cow Ghee — The Goodness of Pure Cow Milk" },
+      { title: "Sri Parvathi Cow Ghee — 100% Pure · Traditional · Homemade" },
       {
         name: "description",
         content:
-          "Pure cow ghee with no added preservatives, from Amul. 500 ml and 1 L glass jars. Free shipping above ₹999, Cash on Delivery available.",
+          "Pure cow ghee with no added preservatives, from Sri Parvathi Ghee. 500 ml and 1 L glass jars. Free shipping above ₹999, Cash on Delivery available.",
       },
-      { property: "og:title", content: "Amul Cow Ghee — The Goodness of Pure Cow Milk" },
+      { property: "og:title", content: "Sri Parvathi Cow Ghee — 100% Pure · Traditional · Homemade" },
       {
         property: "og:description",
-        content: "Pure • Natural • Traditional cow ghee. A legacy of trust since 70+ years, from Amul.",
+        content: "100% Pure · Traditional · Homemade cow ghee. Crafted with care, no added preservatives.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -51,7 +51,7 @@ function Home() {
     <>
       <Hero />
       <TrustStrip />
-      <WhyAmul />
+      <WhySriParvathi />
       <Bestsellers />
       <StoryTeaser />
     </>
@@ -73,8 +73,8 @@ function Hero() {
             </span>
           </h1>
           <p className="max-w-md text-lg text-forest/85">
-            Golden cow ghee in a glass jar, from a name families have trusted for over seventy years —
-            Amul.
+            Golden cow ghee in a glass jar — pure, traditional, homemade.
+            Sri Parvathi Ghee.
           </p>
           <div className="flex flex-wrap gap-3">
             <Button variant="cta" size="xl" asChild>
@@ -99,7 +99,7 @@ function Hero() {
           <div className="relative rounded-full border-[3px] border-gold-light p-3 md:p-4">
             <img
               src={jarImage}
-              alt="Amul Cow Ghee 500 ml glass jar with gold lid"
+              alt="Sri Parvathi Cow Ghee 500 ml glass jar with gold lid"
               width={560}
               height={560}
               className="animate-float-soft aspect-square w-64 rounded-full object-cover shadow-lift sm:w-80 md:w-96"
@@ -114,7 +114,7 @@ function Hero() {
 
 function TrustStrip() {
   return (
-    <section aria-label="Why customers trust Amul" className="bg-cream">
+    <section aria-label="Why customers trust Sri Parvathi Ghee" className="bg-cream">
       <div className="container-brand">
         <ul className="grid grid-cols-2 gap-4 py-8 sm:grid-cols-3 lg:grid-cols-5">
           {TRUST.map(({ icon: Icon, label }) => (
@@ -131,12 +131,12 @@ function TrustStrip() {
   );
 }
 
-function WhyAmul() {
+function WhySriParvathi() {
   const ref = useReveal<HTMLDivElement>();
   return (
     <section className="bg-card py-16 md:py-24">
       <div ref={ref} className="reveal container-brand">
-        <SectionHeading eyebrow="Why Amul" title="Simple, honest ghee" subtitle="Everything we promise is printed right on the jar." />
+        <SectionHeading eyebrow="Why Sri Parvathi" title="Simple, honest ghee" subtitle="Everything we promise is printed right on the jar." />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {WHY.map(({ icon: Icon, title, text }) => (
             <div key={title} className="card-brand p-6">
@@ -183,12 +183,11 @@ function StoryTeaser() {
           className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lift"
         />
         <div className="flex flex-col items-start gap-5">
-          <SectionHeading align="left" eyebrow="From Amul" title="A legacy of trust since 70+ years" />
+          <SectionHeading align="left" eyebrow="From Sri Parvathi Ghee" title="Pure · Traditional · Homemade" />
           <p className="font-script text-3xl text-teal-dark">From our house to yours</p>
           <p className="text-muted-foreground">
-            Amul carries forward a name families have relied on for more than seven decades. Every jar is
-            filled with the same care — pure cow ghee, no added preservatives, made to bring traditional
-            goodness to your everyday cooking.
+            Sri Parvathi Ghee is made the traditional way — pure cow ghee, no added preservatives,
+            crafted with care to bring homemade goodness to your everyday cooking.
           </p>
           <Button variant="forestOutline" asChild>
             <Link to="/about">

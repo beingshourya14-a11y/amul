@@ -228,7 +228,7 @@ export function SiteHeader() {
         {/* Drawer footer */}
         <div className="mt-auto border-t border-gold/10 px-5 py-5">
           <p className="text-[0.65rem] uppercase tracking-[0.2em] text-gold-light/70">
-            The Taste of India
+            100% Pure · Traditional · Homemade
           </p>
           <p className="mt-1 text-xs text-forest-foreground/50">
             Pure • Natural • Traditional
