@@ -19,7 +19,7 @@ export function ProductCard({ product }: { product: Product }) {
           loading="lazy"
           width={400}
           height={400}
-          className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-105"
+          className="aspect-[4/3] w-full object-contain bg-cream-alt p-4 transition-transform duration-500 hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
