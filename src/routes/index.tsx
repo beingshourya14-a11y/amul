@@ -5,7 +5,7 @@ import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { HillDivider } from "@/components/site/HillDivider";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import jarImage from "@/assets/ghee_2_small_jar_4k.png";
+import jarImage from "@/assets/ghee_4_all_jars_group_4k.png";
 import kitchenImage from "@/assets/ghee_4_all_jars_group_4k.png";
 import { PACKAGING_CLAIMS, PRODUCTS } from "@/lib/catalog";
 import { useReveal } from "@/lib/use-reveal";
