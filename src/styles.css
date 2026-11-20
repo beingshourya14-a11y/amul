@@ -9,14 +9,14 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Dhenora design system — derived from the jar label:
- * teal label, deep forest green, gold trim, ghee yellow, warm cream base.
+ * Sri Parvathi Ghee design system — premium green & gold palette.
+ * Warm ivory base, deep forest green, rich antique gold, ghee amber.
  * All colours are oklch. Components use only these semantic tokens.
  */
 
 @theme inline {
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "DM Sans", "Inter", system-ui, sans-serif;
   --font-script: "Caveat", cursive;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -57,10 +57,12 @@
   --color-forest-foreground: var(--forest-foreground);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
+  --color-gold-muted: var(--gold-muted);
   --color-ghee: var(--ghee);
   --color-ghee-hover: var(--ghee-hover);
   --color-cream: var(--cream);
   --color-cream-alt: var(--cream-alt);
+  --color-ivory: var(--ivory);
   --color-success: var(--success);
   --color-veg: var(--veg);
 
@@ -80,54 +82,82 @@
 }
 
 :root {
-  --radius: 0.75rem; /* 12px — CTA radius; cards use rounded-2xl (16px+) */
+  --radius: 0.875rem; /* 14px base radius */
 
-  /* Brand palette */
-  --teal: oklch(0.644 0.109 216.8);
-  --teal-light: oklch(0.939 0.027 214.4);
-  --teal-dark: oklch(0.537 0.091 218.2);
-  --forest: oklch(0.377 0.076 153.4);
-  --forest-hover: oklch(0.313 0.061 153.3);
-  --forest-foreground: oklch(0.979 0.031 92.9);
-  --gold: oklch(0.728 0.138 89.7);
-  --gold-light: oklch(0.87 0.096 94.8);
-  --ghee: oklch(0.842 0.168 90.4);
-  --ghee-hover: oklch(0.783 0.158 89.6);
-  --cream: oklch(0.979 0.031 92.9);
-  --cream-alt: oklch(0.993 0.012 96.4);
-  --success: oklch(0.523 0.135 144.2);
-  --veg: oklch(0.523 0.135 144.2);
+  /* ── Brand palette ── */
+  /* Green family — deeper, richer */
+  --teal: oklch(0.58 0.11 196);
+  --teal-light: oklch(0.94 0.028 200);
+  --teal-dark: oklch(0.46 0.095 200);
+  --forest: oklch(0.32 0.075 155);
+  --forest-hover: oklch(0.26 0.062 155);
+  --forest-foreground: oklch(0.98 0.018 90);
 
-  /* shadcn semantic mapping */
+  /* Gold family — richer antique gold */
+  --gold: oklch(0.72 0.148 82);
+  --gold-light: oklch(0.86 0.1 88);
+  --gold-muted: oklch(0.88 0.065 88);
+
+  /* Amber / ghee */
+  --ghee: oklch(0.84 0.172 82);
+  --ghee-hover: oklch(0.77 0.16 82);
+
+  /* Cream / ivory base — warmer */
+  --cream: oklch(0.975 0.022 85);
+  --cream-alt: oklch(0.992 0.01 90);
+  --ivory: oklch(0.965 0.03 80);
+
+  /* Accent */
+  --success: oklch(0.5 0.14 148);
+  --veg: oklch(0.5 0.14 148);
+
+  /* ── shadcn semantic mapping ── */
   --background: var(--cream);
-  --foreground: oklch(0.23 0.021 162.5);
+  --foreground: oklch(0.2 0.022 155);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.23 0.021 162.5);
+  --card-foreground: oklch(0.2 0.022 155);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.23 0.021 162.5);
+  --popover-foreground: oklch(0.2 0.022 155);
   --primary: var(--forest);
   --primary-foreground: var(--cream);
   --secondary: var(--teal-light);
   --secondary-foreground: var(--forest);
-  --muted: oklch(0.955 0.02 92);
-  --muted-foreground: oklch(0.451 0.024 163.7);
+  --muted: oklch(0.955 0.018 88);
+  --muted-foreground: oklch(0.44 0.022 155);
   --accent: var(--teal-light);
   --accent-foreground: var(--forest);
-  --destructive: oklch(0.539 0.194 26.7);
+  --destructive: oklch(0.52 0.19 26);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.04 92);
-  --input: oklch(0.88 0.035 92);
+  --border: oklch(0.9 0.028 88);
+  --input: oklch(0.88 0.03 88);
   --ring: var(--teal);
 
-  /* Gradients, shadows, motion */
-  --gradient-hero: linear-gradient(115deg, var(--teal-light) 0%, oklch(0.86 0.055 214) 45%, var(--teal) 100%);
+  /* ── Gradients ── */
+  --gradient-hero: linear-gradient(135deg,
+    oklch(0.96 0.03 90) 0%,
+    oklch(0.945 0.038 185) 40%,
+    oklch(0.92 0.05 195) 100%);
+  --gradient-dark-hero: linear-gradient(135deg, var(--forest) 0%, oklch(0.26 0.09 170) 100%);
   --gradient-gold-line: linear-gradient(90deg, transparent, var(--gold), transparent);
-  --gradient-sun: radial-gradient(circle at 50% 100%, color-mix(in oklab, var(--ghee) 55%, transparent) 0%, color-mix(in oklab, var(--gold-light) 30%, transparent) 40%, transparent 70%);
-  --shadow-card: 0 1px 2px color-mix(in oklab, var(--forest) 6%, transparent), 0 8px 24px -12px color-mix(in oklab, var(--forest) 18%, transparent);
-  --shadow-lift: 0 2px 4px color-mix(in oklab, var(--forest) 8%, transparent), 0 18px 40px -16px color-mix(in oklab, var(--forest) 30%, transparent);
-  --shadow-jar: 0 40px 60px -30px color-mix(in oklab, var(--forest) 55%, transparent);
-  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --gradient-gold-shimmer: linear-gradient(105deg, transparent 30%, color-mix(in oklab,var(--gold) 25%,transparent) 50%, transparent 70%);
+  --gradient-sun: radial-gradient(circle at 50% 100%,
+    color-mix(in oklab, var(--ghee) 50%, transparent) 0%,
+    color-mix(in oklab, var(--gold-light) 28%, transparent) 40%,
+    transparent 70%);
+  --gradient-benefits: linear-gradient(160deg, oklch(0.26 0.075 155) 0%, oklch(0.19 0.055 160) 100%);
 
+  /* ── Shadows ── */
+  --shadow-card: 0 1px 3px color-mix(in oklab,var(--forest) 7%,transparent),
+                 0 8px 28px -10px color-mix(in oklab,var(--forest) 16%,transparent);
+  --shadow-lift: 0 4px 6px color-mix(in oklab,var(--forest) 8%,transparent),
+                 0 20px 48px -16px color-mix(in oklab,var(--forest) 28%,transparent);
+  --shadow-gold: 0 0 0 1px color-mix(in oklab,var(--gold) 40%,transparent),
+                 0 8px 32px -8px color-mix(in oklab,var(--gold) 25%,transparent);
+  --shadow-jar: 0 40px 60px -30px color-mix(in oklab,var(--forest) 55%,transparent);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Charts / Sidebar ── */
   --chart-1: var(--teal);
   --chart-2: var(--forest);
   --chart-3: var(--gold);
@@ -139,7 +169,7 @@
   --sidebar-primary-foreground: var(--forest);
   --sidebar-accent: var(--forest-hover);
   --sidebar-accent-foreground: var(--cream);
-  --sidebar-border: color-mix(in oklab, var(--gold) 40%, transparent);
+  --sidebar-border: color-mix(in oklab, var(--gold) 35%, transparent);
   --sidebar-ring: var(--teal);
 }
 
@@ -212,20 +242,7 @@
   opacity: 0.7;
 }
 
-/* Brand card: white, 16px radius, gold-tinted border, soft shadow, hover lift */
-@utility card-brand {
-  background-color: var(--color-card);
-  border-radius: 1rem;
-  border: 1px solid color-mix(in oklab, var(--gold) 28%, transparent);
-  box-shadow: var(--shadow-card);
-  transition:
-    transform 300ms var(--ease-soft),
-    box-shadow 300ms var(--ease-soft);
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-lift);
-  }
-}
+/* Brand card — now defined at bottom of file */
 
 /* Soft fade-up on scroll (toggled via data-visible) */
 @utility reveal {
@@ -274,5 +291,63 @@
   animation: marquee 28s linear infinite;
   @media (prefers-reduced-motion: reduce) {
     animation: none;
+  }
+}
+
+/* ── Dark benefits section ── */
+@utility bg-benefits {
+  background-image: var(--gradient-benefits);
+}
+
+/* Benefit card on dark bg */
+@utility card-benefit {
+  background-color: color-mix(in oklab, white 7%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 24px -8px color-mix(in oklab, black 35%, transparent);
+  transition: transform 320ms var(--ease-soft), background-color 320ms;
+  &:hover {
+    transform: translateY(-4px);
+    background-color: color-mix(in oklab, white 11%, transparent);
+  }
+}
+
+/* Gold shimmer on icon circles */
+@utility icon-gold {
+  background: linear-gradient(135deg, color-mix(in oklab,var(--gold) 25%,transparent), color-mix(in oklab,var(--ghee) 20%,transparent));
+  border: 1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  border-radius: 9999px;
+}
+
+/* Stat counter pill */
+@utility stat-pill {
+  background-color: color-mix(in oklab, var(--gold) 12%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 35%, transparent);
+  border-radius: 9999px;
+}
+
+/* Section divider with gold ornament */
+@utility ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-image: var(--gradient-gold-line);
+  }
+}
+
+/* Improved card-brand */
+@utility card-brand {
+  background-color: var(--color-card);
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  box-shadow: var(--shadow-card);
+  transition: transform 300ms var(--ease-soft), box-shadow 300ms var(--ease-soft);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
   }
 }
