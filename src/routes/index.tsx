@@ -193,80 +193,116 @@ function TrustStrip() {
 function BenefitsSection() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section className="bg-benefits relative overflow-hidden py-20 md:py-28">
+    <section className="bg-benefits relative overflow-hidden py-20 md:py-32">
 
-      {/* Subtle bg ornament */}
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{ backgroundImage: "radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px)", backgroundSize: "60px 60px" }}
+      {/* Large blurred gold orb — top right */}
+      <div
+        className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full opacity-[0.07]"
+        style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)" }}
+        aria-hidden="true"
+      />
+      {/* Large blurred teal orb — bottom left */}
+      <div
+        className="pointer-events-none absolute -bottom-32 -left-32 h-[28rem] w-[28rem] rounded-full opacity-[0.06]"
+        style={{ background: "radial-gradient(circle, var(--teal) 0%, transparent 70%)" }}
         aria-hidden="true"
       />
 
       <div ref={ref} className="reveal container-brand relative z-10">
 
-        {/* Heading */}
-        <div className="flex flex-col items-center text-center gap-4 mb-14">
-          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-light/80">
+        {/* ── Heading block ── */}
+        <div className="flex flex-col items-center gap-5 text-center mb-16">
+          {/* Pill eyebrow */}
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold-light backdrop-blur-sm">
+            <span className="size-1.5 rounded-full bg-gold-light animate-pulse" />
             Why Choose Sri Parvathi Ghee
           </span>
-          <h2 className="font-serif text-3xl font-bold text-forest-foreground md:text-5xl">
+
+          <h2 className="font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
             Nature's Purest Gift,
-            <span className="block mt-1 text-gold-light">In Every Drop</span>
+            <span className="block mt-1" style={{ color: "var(--gold-light)" }}>In Every Drop</span>
           </h2>
-          {/* Gold ornament line */}
-          <div className="flex items-center gap-4 mt-1">
-            <div className="h-px w-16 bg-gradient-to-r from-transparent to-gold/60" />
-            <span className="text-gold text-lg">✦</span>
-            <div className="h-px w-16 bg-gradient-to-l from-transparent to-gold/60" />
+
+          {/* Ornament */}
+          <div className="flex items-center gap-3">
+            <div className="h-px w-20 bg-gradient-to-r from-transparent via-gold/50 to-gold/80" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2l2.5 7.5H22l-6 4.5 2.5 7.5L12 17l-6.5 4.5L8 14 2 9.5h7.5z" fill="var(--gold)" fillOpacity="0.8" />
+            </svg>
+            <div className="h-px w-20 bg-gradient-to-l from-transparent via-gold/50 to-gold/80" />
           </div>
-          <p className="max-w-xl text-sm leading-relaxed text-forest-foreground/70 md:text-base">
-            Pure cow ghee isn't just a cooking ingredient — it's a centuries-old superfood
-            with proven benefits for your body, mind, and soul.
+
+          <p className="max-w-2xl text-base leading-relaxed text-white/60 md:text-lg">
+            Pure cow ghee is a centuries-old superfood — packed with nutrients, free from additives,
+            and crafted with traditional care your family can taste.
           </p>
         </div>
 
-        {/* Stats row */}
-        <div className="mb-14 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        {/* ── Stats strip ── */}
+        <div className="mb-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {STATS.map(({ value, label }) => (
-            <div key={label} className="flex flex-col items-center rounded-2xl border border-gold/20 bg-white/5 py-5 px-4 text-center backdrop-blur-sm">
-              <span className="font-serif text-4xl font-bold text-gold-light md:text-5xl">{value}</span>
-              <span className="mt-1.5 text-xs font-medium uppercase tracking-wider text-forest-foreground/60">{label}</span>
+            <div
+              key={label}
+              className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-gold/25 px-5 py-7 text-center"
+              style={{ background: "linear-gradient(145deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%)" }}
+            >
+              {/* Inner gold shimmer */}
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
+              <span className="font-serif text-5xl font-bold tracking-tight text-gold-light md:text-6xl">
+                {value}
+              </span>
+              <span className="mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white/50">
+                {label}
+              </span>
             </div>
           ))}
         </div>
 
-        {/* Benefit cards grid */}
+        {/* ── Benefit cards ── */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {BENEFITS.map(({ icon: Icon, title, text, color, iconColor }) => (
-            <div key={title} className="card-benefit group p-6">
+          {BENEFITS.map(({ icon: Icon, title, text, color, iconColor }, i) => (
+            <div
+              key={title}
+              className="group relative flex flex-col overflow-hidden rounded-3xl border border-white/8 p-7 transition-all duration-500 hover:-translate-y-1"
+              style={{ background: "linear-gradient(145deg, rgba(255,255,255,0.075) 0%, rgba(255,255,255,0.03) 100%)" }}
+            >
+              {/* Top gold line on hover */}
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-gold/70 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
               {/* Icon */}
-              <div className={`mb-5 flex size-14 items-center justify-center rounded-2xl bg-gradient-to-br ${color} border border-white/10`}>
-                <Icon className={`size-7 ${iconColor}`} aria-hidden="true" />
+              <div className={`mb-6 flex size-16 items-center justify-center rounded-2xl bg-gradient-to-br ${color}`}
+                style={{ boxShadow: "0 4px 20px -4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)" }}>
+                <Icon className={`size-8 ${iconColor} drop-shadow-sm`} aria-hidden="true" />
               </div>
 
-              {/* Content */}
-              <h3 className="font-serif text-xl font-semibold text-forest-foreground">
+              {/* Number badge */}
+              <span className="mb-3 font-serif text-xs font-semibold text-gold/50">
+                0{i + 1}
+              </span>
+
+              <h3 className="font-serif text-xl font-semibold text-white md:text-2xl">
                 {title}
               </h3>
-              <p className="mt-2.5 text-sm leading-relaxed text-forest-foreground/65">
+
+              <div className="my-3 h-px w-8 bg-gradient-to-r from-gold/70 to-transparent transition-all duration-500 group-hover:w-16" />
+
+              <p className="text-sm leading-relaxed text-white/55 md:text-[0.9rem]">
                 {text}
               </p>
-
-              {/* Hover bottom accent line */}
-              <div className="mt-5 h-0.5 w-0 rounded-full bg-gradient-to-r from-gold to-ghee transition-all duration-500 group-hover:w-12" />
             </div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-14 flex flex-col items-center gap-4 text-center">
-          <p className="font-script text-2xl text-gold-light/90 md:text-3xl">
+        {/* ── Bottom CTA ── */}
+        <div className="mt-16 flex flex-col items-center gap-5 text-center">
+          <p className="font-script text-3xl text-gold-light/80 md:text-4xl">
             From our home to yours — pure, always.
           </p>
           <Button
             variant="cta"
             size="xl"
             asChild
-            className="mt-1 shadow-[0_4px_24px_-4px_color-mix(in_oklab,var(--ghee)_50%,transparent)]"
+            className="px-10 text-base font-bold shadow-[0_6px_32px_-4px_color-mix(in_oklab,var(--ghee)_55%,transparent)] transition-shadow hover:shadow-[0_8px_40px_-4px_color-mix(in_oklab,var(--ghee)_70%,transparent)]"
           >
             <Link to="/shop">
               Shop Sri Parvathi Ghee <ArrowRight className="size-4" />
