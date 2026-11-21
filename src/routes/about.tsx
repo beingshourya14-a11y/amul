@@ -1,10 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Flame, Filter, Leaf, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import kitchenImage from "@/assets/ghee_4_all_jars_group_4k.png";
 import { PACKAGING_CLAIMS } from "@/lib/catalog";
+import { OG_IMAGE_URL } from "@/lib/config";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -17,11 +18,20 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "Our Story — Sri Parvathi Ghee" },
       { property: "og:description", content: "100% Pure · Traditional · Homemade cow ghee." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
   }),
   component: About,
 });
+
+const HOW_STEPS = [
+  { num: "01", icon: Leaf,    title: "Quality Sourcing",  body: "We start with carefully selected, wholesome ingredients — fresh cow butter sourced from trusted dairy farmers who share our values." },
+  { num: "02", icon: Filter,  title: "Traditional Method", body: "Made the time-honoured way with no shortcuts. The butter is gently separated and clarified using the traditional Indian process." },
+  { num: "03", icon: Flame,   title: "Slow Heating",       body: "Gently cooked on low heat until it turns golden, releasing that rich, unmistakable aroma that only authentic ghee can have." },
+  { num: "04", icon: Package, title: "Pure and Packed",    body: "Filtered, cooled, and sealed in glass jars with care. No added preservatives — just pure ghee, as nature intended." },
+];
 
 function About() {
   return (
@@ -33,6 +43,7 @@ function About() {
           <p className="mt-4 font-script text-3xl text-teal-dark md:text-4xl">The Goodness of Pure Cow Milk</p>
         </div>
       </section>
+
       <section className="py-16 md:py-24">
         <div className="container-brand grid items-center gap-10 md:grid-cols-2">
           <img
@@ -58,9 +69,45 @@ function About() {
             </div>
             <Button variant="cta" size="xl" asChild>
               <Link to="/shop">
-              Shop Sri Parvathi Ghee <ArrowRight />
+                Shop Sri Parvathi Ghee <ArrowRight />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* How It's Made */}
+      <section className="bg-cream py-16 md:py-24">
+        <div className="container-brand">
+          <SectionHeading
+            eyebrow="Crafted with Care"
+            title="How It's Made"
+            subtitle="Four simple steps. No shortcuts, no additives — just the same process our grandmothers trusted."
+          />
+          <div className="mt-12 relative">
+            <div className="hidden md:block absolute top-10 left-[calc(12.5%-1px)] right-[calc(12.5%-1px)] h-0.5 bg-gradient-to-r from-transparent via-gold/50 to-transparent" aria-hidden="true" />
+            <ol className="grid gap-8 md:grid-cols-4 md:gap-6">
+              {HOW_STEPS.map((step, i) => {
+                const Icon = step.icon;
+                return (
+                  <li key={step.num} className="relative flex gap-5 md:flex-col md:items-center md:gap-4 md:text-center">
+                    {i < HOW_STEPS.length - 1 && (
+                      <div className="absolute left-6 top-16 bottom-[-2rem] w-0.5 bg-gradient-to-b from-gold/40 to-transparent md:hidden" aria-hidden="true" />
+                    )}
+                    <div className="relative shrink-0 flex size-12 items-center justify-center rounded-full border-2 border-gold/40 bg-cream-alt shadow-sm z-10">
+                      <Icon className="size-5 text-forest" aria-hidden="true" />
+                      <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-forest text-[0.55rem] font-bold text-forest-foreground">
+                        {step.num}
+                      </span>
+                    </div>
+                    <div>
+                      <h3 className="font-serif text-lg font-bold text-forest">{step.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{step.body}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
         </div>
       </section>

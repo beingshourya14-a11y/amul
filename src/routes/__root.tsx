@@ -17,6 +17,7 @@ import { CartProvider } from "@/lib/cart";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { CartDrawer } from "@/components/site/CartDrawer";
+import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 
 function NotFoundComponent() {
   return (
@@ -92,7 +93,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Sri Parvathi Cow Ghee — 100% Pure · Traditional · Homemade" },
       { property: "og:description", content: "Sri Parvathi pure cow ghee — 100% pure, traditional, homemade. No added preservatives." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/og-image.jpg" },
+      { property: "og:url", content: "https://sriparvathighee.in" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/og-image.jpg" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -143,6 +147,7 @@ function RootComponent() {
           <SiteFooter />
         </div>
         <CartDrawer />
+        <WhatsAppFab />
         <Toaster position="top-center" />
       </CartProvider>
     </QueryClientProvider>

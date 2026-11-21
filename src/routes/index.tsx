@@ -1,14 +1,21 @@
 ﻿import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Award, Droplets, Quote, ShieldCheck, Sprout, Star, Truck } from "lucide-react";
+import {
+  ArrowRight, Award, BadgeCheck, CheckCircle2, Droplets, Filter,
+  Quote, ShieldCheck, Sprout, Star, Truck, Flame, Package, Leaf,
+} from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ClaimBadge } from "@/components/site/ClaimBadge";
 import { HillDivider } from "@/components/site/HillDivider";
 import { ProductCard } from "@/components/site/ProductCard";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ReviewCard, type Review } from "@/components/site/ReviewCard";
 import jarImage from "@/assets/ghee_4_all_jars_group_4k.png";
 import aboutImage from "@/assets/ghee_2_small_jar_4k.png";
 import { PACKAGING_CLAIMS, PRODUCTS } from "@/lib/catalog";
+import { SHOW_DEMO_LABEL, OG_IMAGE_URL } from "@/lib/config";
 import { useReveal } from "@/lib/use-reveal";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -22,13 +29,16 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Sri Parvathi Cow Ghee — 100% Pure · Traditional · Homemade" },
       { property: "og:description", content: "100% Pure · Traditional · Homemade cow ghee." },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE_URL },
+      { property: "og:url", content: "https://sriparvathighee.in" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE_URL },
     ],
   }),
   component: Home,
 });
 
-/* ── Data ── */
+/* ── Static data ── */
 
 const TRUST = [
   { icon: Droplets,    label: "Pure Cow Ghee"             },
@@ -45,32 +55,45 @@ const STATS = [
   { value: "100%",  label: "Vegetarian"          },
 ];
 
-const TESTIMONIALS = [
+const HOW_STEPS = [
   {
-    name: "Priya S.",
-    location: "Chennai",
-    rating: 5,
-    text: "The aroma when you open the jar is incredible — exactly like homemade ghee from my grandmother's kitchen. We've switched completely.",
+    num: "01",
+    icon: Leaf,
+    title: "Quality Sourcing",
+    body: "We start with carefully selected, wholesome ingredients — fresh cow butter sourced from trusted dairy farmers who share our values.",
   },
   {
-    name: "Rajan M.",
-    location: "Bangalore",
-    rating: 5,
-    text: "Best ghee I've had in years. No strange aftertaste, pure golden colour, and the kids love it on their rotis.",
+    num: "02",
+    icon: Filter,
+    title: "Traditional Method",
+    body: "Made the time-honoured way with no shortcuts. The butter is gently separated and clarified using the traditional Indian process.",
   },
   {
-    name: "Deepa K.",
-    location: "Hyderabad",
-    rating: 5,
-    text: "Ordered for Diwali sweets and everyone kept asking where I bought the ghee. Fast delivery too!",
+    num: "03",
+    icon: Flame,
+    title: "Slow Heating",
+    body: "Gently cooked on low heat until it turns golden, releasing that rich, unmistakable aroma that only authentic ghee can have.",
   },
   {
-    name: "Suresh P.",
-    location: "Coimbatore",
-    rating: 5,
-    text: "Genuine product, no compromise on quality. The 1L jar is great value. Will definitely order again.",
+    num: "04",
+    icon: Package,
+    title: "Pure and Packed",
+    body: "Filtered, cooled, and sealed in glass jars with care. No added preservatives — just pure ghee, as nature intended.",
   },
 ];
+
+const REVIEWS: Review[] = [
+  { name: "Priya S.",   city: "Chennai",    rating: 5, product: "500 ml",         text: "The aroma when you open the jar is incredible — exactly like the ghee my grandmother made. We've switched completely." },
+  { name: "Rajan M.",   city: "Bangalore",  rating: 5, product: "1 L",            text: "No strange aftertaste and a lovely golden colour. My kids love it on hot rotis." },
+  { name: "Deepa K.",   city: "Hyderabad",  rating: 5, product: "500 ml",         text: "Ordered for Diwali sweets and everyone asked where I bought the ghee. Delivery was quick too." },
+  { name: "Suresh P.",  city: "Coimbatore", rating: 4, product: "1 L",            text: "Genuine quality and good value in the 1 L jar. Packaging was safe. Will order again." },
+  { name: "Lakshmi N.", city: "Madurai",    rating: 5, product: "200 ml",         text: "Bought the small jar to try it. The taste is pure and rich — reordered the 500 ml within a week." },
+  { name: "Karthik R.", city: "Coimbatore", rating: 4, product: "Variety Pack",   text: "Gave the variety pack as a festival gift and the family loved it. Would like more gift packaging options." },
+  { name: "Anitha V.",  city: "Vijayawada", rating: 5, product: "500 ml Premium", text: "Smooth texture and a rich aroma. Perfect for pongal and sweets." },
+  { name: "Mohan T.",   city: "Chennai",    rating: 5, product: "1 L",            text: "Tastes like the ghee from my village growing up. Totally worth it." },
+];
+
+const RATING_BARS: [number, number][] = [[5, 75], [4, 17], [3, 5], [2, 2], [1, 1]];
 
 /* ── Page ── */
 
@@ -80,6 +103,7 @@ function Home() {
       <Hero />
       <TrustStrip />
       <BenefitsSection />
+      <HowItsMade />
       <AboutSection />
       <Bestsellers />
       <ReviewsSection />
@@ -167,14 +191,13 @@ function TrustStrip() {
   );
 }
 
-/* ── Benefits section ── */
+/* ── Benefits section — has id="benefits" for anchor nav ── */
 
 function BenefitsSection() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section className="bg-benefits relative overflow-hidden py-20 md:py-32">
+    <section id="benefits" className="bg-benefits relative overflow-hidden py-20 md:py-32">
 
-      {/* Ambient orbs */}
       <div
         className="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full opacity-[0.07]"
         style={{ background: "radial-gradient(circle, var(--gold) 0%, transparent 70%)" }}
@@ -188,7 +211,6 @@ function BenefitsSection() {
 
       <div ref={ref} className="reveal container-brand relative z-10">
 
-        {/* Heading */}
         <div className="flex flex-col items-center gap-5 text-center mb-16">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-5 py-2 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-gold-light backdrop-blur-sm">
             <span className="size-1.5 rounded-full bg-gold-light animate-pulse" />
@@ -214,7 +236,6 @@ function BenefitsSection() {
           </p>
         </div>
 
-        {/* Stats */}
         <div className="mb-16 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {STATS.map(({ value, label }) => (
             <div
@@ -229,7 +250,6 @@ function BenefitsSection() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="flex flex-col items-center gap-5 text-center">
           <p className="font-script text-3xl text-gold-light/80 md:text-4xl">
             From our home to yours — pure, always.
@@ -251,15 +271,65 @@ function BenefitsSection() {
   );
 }
 
+/* ── How It's Made ── */
+
+function HowItsMade() {
+  const ref = useReveal<HTMLDivElement>();
+  return (
+    <section className="bg-cream py-16 md:py-24">
+      <div ref={ref} className="reveal container-brand">
+        <SectionHeading
+          eyebrow="Crafted with Care"
+          title="How It's Made"
+          subtitle="Four simple steps. No shortcuts, no additives — just the same process our grandmothers trusted."
+        />
+
+        {/* Vertical timeline on mobile, horizontal on desktop */}
+        <div className="mt-12 relative">
+
+          {/* Desktop connector line */}
+          <div className="hidden md:block absolute top-10 left-[calc(12.5%-1px)] right-[calc(12.5%-1px)] h-0.5 bg-gradient-to-r from-transparent via-gold/50 to-transparent" aria-hidden="true" />
+
+          <ol className="grid gap-8 md:grid-cols-4 md:gap-6">
+            {HOW_STEPS.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <li key={step.num} className="relative flex gap-5 md:flex-col md:items-center md:gap-4 md:text-center">
+                  {/* Mobile vertical line */}
+                  {i < HOW_STEPS.length - 1 && (
+                    <div className="absolute left-6 top-16 bottom-[-2rem] w-0.5 bg-gradient-to-b from-gold/40 to-transparent md:hidden" aria-hidden="true" />
+                  )}
+
+                  {/* Step icon circle */}
+                  <div className="relative shrink-0 flex size-12 items-center justify-center rounded-full border-2 border-gold/40 bg-cream-alt shadow-sm z-10">
+                    <Icon className="size-5 text-forest" aria-hidden="true" />
+                    <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-forest text-[0.55rem] font-bold text-forest-foreground">
+                      {step.num}
+                    </span>
+                  </div>
+
+                  <div>
+                    <h3 className="font-serif text-lg font-bold text-forest">{step.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{step.body}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ── About section ── */
 
 function AboutSection() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section className="bg-cream py-16 md:py-24">
+    <section className="bg-ivory py-16 md:py-24">
       <div ref={ref} className="reveal container-brand grid items-center gap-10 md:grid-cols-2">
 
-        {/* Image side */}
         <div className="relative order-2 md:order-1">
           <img
             src={aboutImage}
@@ -269,14 +339,12 @@ function AboutSection() {
             height={900}
             className="w-full max-h-[480px] rounded-3xl object-contain shadow-lift"
           />
-          {/* Floating badge */}
           <div className="absolute -right-3 -top-3 rounded-2xl bg-forest px-4 py-3 text-center shadow-lift md:-right-5 md:-top-5">
             <p className="font-serif text-2xl font-bold text-gold-light">100%</p>
             <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-forest-foreground/80">Pure</p>
           </div>
         </div>
 
-        {/* Content side */}
         <div className="order-1 md:order-2 flex flex-col items-start gap-5">
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-dark">Our Story</span>
           <h2 className="font-serif text-3xl font-bold leading-tight text-forest md:text-4xl">
@@ -312,7 +380,7 @@ function AboutSection() {
 function Bestsellers() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section className="bg-ivory py-16 md:py-24">
+    <section className="bg-cream py-16 md:py-24">
       <div ref={ref} className="reveal container-brand">
         <SectionHeading
           eyebrow="Shop"
@@ -333,8 +401,17 @@ function Bestsellers() {
 
 function ReviewsSection() {
   const ref = useReveal<HTMLDivElement>();
+  const [showForm, setShowForm] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", rating: "5", comment: "" });
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSubmitted(true);
+  }
+
   return (
-    <section className="bg-cream py-16 md:py-24">
+    <section className="bg-ivory py-16 md:py-24">
       <div ref={ref} className="reveal container-brand">
         <SectionHeading
           eyebrow="Customer Reviews"
@@ -342,40 +419,104 @@ function ReviewsSection() {
           subtitle="Thousands of families trust Sri Parvathi Ghee every day."
         />
 
-        {/* Rating bar */}
-        <div className="mx-auto mt-8 mb-10 flex max-w-xs flex-col items-center gap-2">
-          <span className="font-serif text-6xl font-bold text-forest">5.0</span>
-          <div className="flex gap-1">
-            {[1,2,3,4,5].map((s) => <Star key={s} className="size-5 fill-gold text-gold" />)}
+        {/* Rating summary */}
+        <div className="mx-auto mt-8 mb-10 flex max-w-sm items-center gap-6 rounded-2xl border bg-card p-5 shadow-sm">
+          <div className="flex flex-col items-center">
+            <span className="font-serif text-6xl font-bold text-forest">4.8</span>
+            <div className="mt-1 flex gap-0.5">
+              {[1,2,3,4,5].map((s) => <Star key={s} className="size-4 fill-gold text-gold" />)}
+            </div>
+            <span className="mt-1 text-xs text-muted-foreground text-center">Based on 200+ reviews</span>
           </div>
-          <span className="text-sm text-muted-foreground">Based on 200+ verified purchases</span>
+          <div className="flex-1 flex flex-col gap-1.5">
+            {RATING_BARS.map(([stars, pct]) => (
+              <div key={stars} className="flex items-center gap-2">
+                <span className="text-xs w-3 text-muted-foreground">{stars}</span>
+                <Star className="size-3 fill-gold text-gold shrink-0" />
+                <div className="flex-1 h-2 rounded-full bg-teal-light overflow-hidden">
+                  <div className="h-full rounded-full bg-gold" style={{ width: `${pct}%` }} />
+                </div>
+                <span className="text-xs text-muted-foreground w-8 text-right">{pct}%</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {TESTIMONIALS.map((r) => (
-            <div
-              key={r.name}
-              className="card-brand flex flex-col gap-3 p-5"
-            >
-              <Quote className="size-6 text-gold opacity-60" aria-hidden="true" />
-              <p className="flex-1 text-sm text-muted-foreground leading-relaxed">{r.text}</p>
-              <div className="flex items-center gap-2 border-t pt-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-forest text-xs font-bold text-forest-foreground">
-                  {r.name[0]}
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-forest">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.location}</p>
-                </div>
-                <div className="ml-auto flex gap-0.5">
-                  {[1,2,3,4,5].map((s) => (
-                    <Star key={s} className={`size-3 ${s <= r.rating ? "fill-gold text-gold" : "text-muted-foreground/30"}`} />
-                  ))}
-                </div>
-              </div>
+        {/* Mobile: horizontal scroll carousel; md+: 3-col grid */}
+        <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+          {REVIEWS.map((r) => (
+            <div key={r.name} className="shrink-0 w-[85vw] snap-start sm:w-[65vw] md:w-auto">
+              <ReviewCard review={r} />
             </div>
           ))}
+        </div>
+
+        {/* Demo label */}
+        {SHOW_DEMO_LABEL && (
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            Sample reviews shown for demo purposes.
+          </p>
+        )}
+
+        {/* Write a review */}
+        <div className="mt-8 flex justify-center">
+          {!showForm ? (
+            <Button variant="forestOutline" className="min-h-[44px]" onClick={() => setShowForm(true)}>
+              Write a Review
+            </Button>
+          ) : submitted ? (
+            <div className="flex items-center gap-3 rounded-2xl border bg-card px-6 py-5 shadow-sm">
+              <CheckCircle2 className="size-6 text-success shrink-0" />
+              <p className="text-sm font-medium text-forest">Thank you! Your review has been submitted.</p>
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="w-full max-w-md rounded-2xl border bg-card p-5 shadow-sm flex flex-col gap-4"
+            >
+              <h3 className="font-serif text-xl font-bold text-forest">Write a Review</h3>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="rev-name" className="text-sm font-semibold text-forest">Your Name</label>
+                <input
+                  id="rev-name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                  className="h-11 rounded-lg border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-forest/40"
+                  placeholder="e.g. Priya S."
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="rev-rating" className="text-sm font-semibold text-forest">Rating</label>
+                <select
+                  id="rev-rating"
+                  value={form.rating}
+                  onChange={(e) => setForm((f) => ({ ...f, rating: e.target.value }))}
+                  className="h-11 rounded-lg border border-input bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-forest/40"
+                >
+                  {[5,4,3,2,1].map((n) => (
+                    <option key={n} value={n}>{n} star{n > 1 ? "s" : ""}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="rev-comment" className="text-sm font-semibold text-forest">Your Review</label>
+                <textarea
+                  id="rev-comment"
+                  required
+                  rows={3}
+                  value={form.comment}
+                  onChange={(e) => setForm((f) => ({ ...f, comment: e.target.value }))}
+                  className="rounded-lg border border-input bg-background px-3 py-2.5 text-sm outline-none focus:ring-2 focus:ring-forest/40 resize-none"
+                  placeholder="Tell us what you thought…"
+                />
+              </div>
+              <div className="flex gap-3">
+                <Button type="submit" variant="cta" className="flex-1 min-h-[44px]">Submit Review</Button>
+                <Button type="button" variant="forestOutline" className="min-h-[44px]" onClick={() => setShowForm(false)}>Cancel</Button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </section>
@@ -386,10 +527,9 @@ function ReviewsSection() {
 
 function SuggestedProducts() {
   const ref = useReveal<HTMLDivElement>();
-  // Show top 3 products as suggestions (excluding variety pack)
   const suggested = PRODUCTS.filter((p) => p.id !== "cow-ghee-multipack").slice(0, 3);
   return (
-    <section className="bg-ivory py-16 md:py-24">
+    <section className="bg-cream py-16 md:py-24">
       <div ref={ref} className="reveal container-brand">
         <SectionHeading
           eyebrow="You May Also Like"

@@ -15,6 +15,8 @@ export const FREE_SHIPPING_THRESHOLD = 999; // free shipping on orders above ₹
 
 export type Product = {
   id: string;
+  /** URL-safe slug used in /product/:slug routes */
+  slug: string;
   name: string;
   size: string;
   price: number;
@@ -53,6 +55,7 @@ const COMMON_DETAILS = {
 export const PRODUCTS: Product[] = [
   {
     id: "cow-ghee-200ml",
+    slug: "cow-ghee-200ml",
     name: "Sri Parvathi Cow Ghee",
     size: "200 ml",
     price: 450,
@@ -65,6 +68,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cow-ghee-500ml",
+    slug: "cow-ghee-500ml",
     name: "Sri Parvathi Cow Ghee",
     size: "500 ml",
     price: 1000,
@@ -77,6 +81,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cow-ghee-1l",
+    slug: "cow-ghee-1l",
     name: "Sri Parvathi Cow Ghee",
     size: "1 L",
     price: 2000,
@@ -89,6 +94,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cow-ghee-multipack",
+    slug: "cow-ghee-variety-pack",
     name: "Sri Parvathi Cow Ghee",
     size: "Variety Pack",
     price: 2500,
@@ -101,6 +107,7 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "cow-ghee-500ml-premium",
+    slug: "cow-ghee-500ml-premium",
     name: "Sri Parvathi Cow Ghee",
     size: "500 ml Premium",
     price: 1200,
@@ -112,6 +119,11 @@ export const PRODUCTS: Product[] = [
     },
   },
 ];
+
+/** Look up a product by its URL slug */
+export function getProductBySlug(slug: string) {
+  return PRODUCTS.find((p) => p.slug === slug);
+}
 
 /** Only the claims printed on the Sri Parvathi Ghee jar. Do not add others. */
 export const PACKAGING_CLAIMS = [
