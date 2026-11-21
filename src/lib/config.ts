@@ -3,9 +3,6 @@
  * Replace every PLACEHOLDER value before going live.
  */
 
-/** WhatsApp phone number including country code, no + or spaces. e.g. "919876543210" */
-export const WHATSAPP_NUMBER = "91XXXXXXXXXX";
-
 /** FSSAI licence number printed on jars */
 export const FSSAI_NUMBER = "XXXXXXXXXXXXXX";
 

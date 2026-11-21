@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { MapPin, CheckCircle2, XCircle, Loader2 } from "lucide-react";
 import { SERVICEABLE_PREFIXES } from "@/lib/config";
-import { productWaUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "sri-parvathi-last-pincode";
@@ -32,7 +31,6 @@ export function PincodeChecker({ compact = false }: Props) {
   const [pin, setPin] = useState("");
   const [status, setStatus] = useState<Status>("idle");
 
-  // Restore last pincode
   useEffect(() => {
     const saved = loadSaved();
     if (saved) {
@@ -49,7 +47,6 @@ export function PincodeChecker({ compact = false }: Props) {
       return;
     }
     setStatus("checking");
-    // Simulate async (keeps the door open for a real API later)
     setTimeout(() => {
       const prefix = v.slice(0, 2);
       const ok = SERVICEABLE_PREFIXES.includes(prefix);
@@ -111,7 +108,6 @@ export function PincodeChecker({ compact = false }: Props) {
         </button>
       </div>
 
-      {/* Result */}
       {status === "available" && (
         <div className="mt-2 flex items-start gap-1.5 text-sm text-success">
           <CheckCircle2 className="mt-0.5 size-4 shrink-0" />
@@ -119,19 +115,9 @@ export function PincodeChecker({ compact = false }: Props) {
         </div>
       )}
       {status === "unavailable" && (
-        <div className="mt-2 text-sm text-destructive">
-          <div className="flex items-start gap-1.5">
-            <XCircle className="mt-0.5 size-4 shrink-0" />
-            <span>Sorry, we don't deliver to this pincode yet.</span>
-          </div>
-          <a
-            href={productWaUrl("Sri Parvathi Cow Ghee", "", 0)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-forest underline underline-offset-2"
-          >
-            Order on WhatsApp — we'll try to help →
-          </a>
+        <div className="mt-2 flex items-start gap-1.5 text-sm text-destructive">
+          <XCircle className="mt-0.5 size-4 shrink-0" />
+          <span>Sorry, we don't deliver to this pincode yet. Please contact us for more information.</span>
         </div>
       )}
     </div>
